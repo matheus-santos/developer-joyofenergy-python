@@ -6,11 +6,11 @@ class PricePlan:
         self.peak_time_multipliers = peak_time_multipliers
 
     def add_multiplier(self, day_of_week, multiplier):
-        print("Add multiplier")
         self.peak_time_multipliers.append(self.PeakTimeMultiplier(day_of_week, multiplier))
 
     def change_multiplier_by_index(self, index, multiplier):
-        self.peak_time_multipliers[index].multiplier = multiplier
+        if index in self.peak_time_multipliers:
+            self.peak_time_multipliers[index].multiplier = multiplier
 
     def get_price(self, date_time):
         matching_multipliers = [m for m in self.peak_time_multipliers if m.day_of_week == date_time.isoweekday()]

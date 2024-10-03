@@ -1,4 +1,3 @@
-import json
 from ..domain.price_plan import PricePlan
 
 
@@ -22,7 +21,6 @@ class PricePlanRepository:
         return None
 
     def store_peak_multipliers(self, name, peak_time_multipliers):
-
         # Get price plan
         price_plan = self.get_price_plan(name)
 
@@ -39,12 +37,11 @@ class PricePlanRepository:
 
         # Upsert
         for day_of_week in range(7):
-
             # Update current day of the week with new multiplier
             if day_of_week in idx and day_of_week in to_update:
                 index = idx[day_of_week]
                 multiplier = to_update[day_of_week]
-                price_plan.change_multiplier_by_index(index, to_update[day_of_week])
+                price_plan.change_multiplier_by_index(index, multiplier)
 
             # Insert new multiplier
             elif day_of_week in to_update:
