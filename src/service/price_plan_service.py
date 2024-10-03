@@ -1,10 +1,10 @@
-import json
+from datetime import date
 from functools import reduce
 
+from ..domain.price_plan import PricePlan
 from ..repository.price_plan_repository import price_plan_repository
 from .electricity_reading_service import ElectricityReadingService
 from .time_converter import time_elapsed_in_hours
-from ..domain.price_plan import PricePlan
 
 
 def calculate_time_elapsed(readings):
@@ -30,7 +30,9 @@ class PricePlanService:
 
         def cost_from_plan(price_plan):
             cost = {}
-            cost[price_plan.name] = consumed_energy * price_plan.unit_rate
+            # cost[price_plan.name] = consumed_energy * price_plan.unit_rate
+            # TODO: including peak multiplier when calculating price
+            cost[price_plan.name] = consumed_energy * price_plan.get_price(date.today())
             return cost
 
         list_of_spend = list(map(cost_from_plan, self.cheapest_plans_first(price_plans)))

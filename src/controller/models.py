@@ -28,6 +28,10 @@ class PricePlanPeakTimeMultipliers(BaseModel):
     peakTimeMultipliers: List[PeakTimeMultipliers]
 
 
+class PricePlan(BaseModel):
+    pricePlanId: str
+
+
 OPENAPI_EXAMPLES = {
     "Sarah": {"value": "smart-meter-0"},
     "Peter": {"value": "smart-meter-1"},
