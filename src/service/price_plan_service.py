@@ -53,3 +53,8 @@ class PricePlanService:
                 )
             ),
         )
+
+    def clear_all_peak_multipliers(self, price_plan_id):
+        price_plan = price_plan_repository.get_price_plan(price_plan_id)
+        price_plan.peak_time_multipliers = []
+        return price_plan
