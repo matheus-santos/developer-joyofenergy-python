@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, Path, Query
 from ..service.account_service import AccountService
 from ..service.price_plan_service import PricePlanService
 from .electricity_reading_controller import repository as readings_repository
-from .models import OPENAPI_EXAMPLES, PricePlanPeakTimeMultipliers, PricePlanComparisons
+from .models import OPENAPI_EXAMPLES, PricePlan, PricePlanPeakTimeMultipliers, PricePlanComparisons
 
 service = PricePlanService(readings_repository)
 
@@ -29,5 +29,5 @@ def store(data: PricePlanPeakTimeMultipliers):
     "/peak/clear-all",
     description="Store Price Plan Peak Time Multipliers",
 )
-def store(data: PricePlanPeakTimeMultipliers):
+def store(data: PricePlan):
     return service.clear_all_peak_multipliers(data.pricePlanId)
