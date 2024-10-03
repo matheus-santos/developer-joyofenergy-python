@@ -19,11 +19,15 @@ router = APIRouter(
 
 @router.post(
     "/peak/store",
-    # response_model=PricePlanPeakTimeMultipliers,
     description="Store Price Plan Peak Time Multipliers",
 )
 def store(data: PricePlanPeakTimeMultipliers):
     return service.store_peak_multipliers(data.pricePlanId, data.model_dump(mode="json"))
-    # return {"message": "Welcome to the JoyEnergy "}
-    # service.store_reading(data.model_dump(mode="json"))
-    # return data
+
+
+@router.post(
+    "/peak/clear-all",
+    description="Store Price Plan Peak Time Multipliers",
+)
+def store(data: PricePlanPeakTimeMultipliers):
+    return service.clear_all_peak_multipliers(data.pricePlanId)
